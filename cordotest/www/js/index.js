@@ -10,6 +10,16 @@ function init() {
     loadTaskList();
 
     $("#addTask").click(addTask);
+    $("#pepe").on("click", ".delete", deleteEle);
+
+
+}
+
+function deleteEle() {
+    var listItem = $(this).closest("li");
+    listItem.remove();
+    saveTaskList();
+    updateAndSaveTaskList();
 }
 
 function addTask() {
@@ -17,7 +27,9 @@ function addTask() {
     if (taskName.trim() !== "") {
         var newElem = $('<li>' + taskName +
             '<button class="editButton" data-icon="edit" data-iconpos="notext">Edit</button>' +
-            '<button class="deleteButton" data-icon="delete" data-iconpos="notext">Delete</button></li>');
+            '<button class="delete" data-icon="delete" data-iconpos="notext">Delete</button></li>');
+
+
 
         $('ul').append(newElem).listview('refresh');
 
@@ -47,7 +59,7 @@ function loadTaskList() {
         taskNameArray.forEach(function (taskName) {
             var newElem = $('<li>' + taskName +
                 '<button class="editButton" data-icon="edit" data-iconpos="notext">Edit</button>' +
-                '<button class="deleteButton" data-icon="delete" data-iconpos="notext">Delete</button></li>');
+                '<button class="delete" data-icon="delete" data-iconpos="notext">Delete</button></li>');
             $('ul').append(newElem);
         });
         
